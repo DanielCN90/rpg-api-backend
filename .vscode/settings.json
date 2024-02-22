@@ -2,5 +2,7 @@
     "appService.zipIgnorePattern": [
         "node_modules{,/**}",
         ".vscode{,/**}"
-    ]
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/c9bb938c-f1f2-4360-8eb6-f06ecf1ed972/resourceGroups/PersonalGroup/providers/Microsoft.Web/sites/rpgapi",
+    "appService.deploySubpath": "."
 }
