@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var monstersRouter = require('./routes/monsters');
 var itemsRouter = require('./routes/items');
 var itemTypesRouter = require('./routes/itemsTypes');
+var shopRouter = require('./routes/shop');
 var app = express();
 
 // view engine setup
@@ -31,7 +32,7 @@ app.use('/docs', indexRouter);
 app.use('/monsters', monstersRouter);
 app.use('/items', itemsRouter);
 app.use('/itemTypes', itemTypesRouter);
-
+app.use('/shop', shopRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

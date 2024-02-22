@@ -25,7 +25,7 @@ block content
         .doc-body.row
           .doc-content.col-md-9.col-12.order-1
             .content-inner
-              section#download-section.doc-section
+              section#welcome.doc-section
                 h2.section-title Welcome to the RPG API Documentation!
                 .section-block
                
@@ -33,23 +33,19 @@ block content
                     | Is designed with simplicity in mind, providing a basic set of endpoints perfect for small exercise applications and learning projects. It's the ideal tool for practicing API integration, honing your coding skills, and experimenting with RPG game mechanics.
                   p So, dive in, explore the possibilities, and start building your own RPG-inspired applications today. Let your imagination run wild and have fun coding!
           
-              section#code-section.doc-section
+              section#items.doc-section
                 h2.section-title Items
                 .section-block
-                  p
-                    a(href='https://prismjs.com/' target='_blank') PrismJS
-                    |  is used as the syntax highlighter here. You can 
-                    a(href='https://prismjs.com/download.html' target='_blank') build your own version
-                    |  via their website should you need to.
-                // //section-block
+                  p Create a fantasy store with items of all clases. 
+                    
+                    
         
         
-                #item1.section-block
+                #getitems.section-block
                   .code-block
                     h5 
                      span.method-get GET-  
-                     span Retrive all item list
-                    span Exist more of 100+ items registered
+                     span Retrive all item list                    
                     pre
                       code.language-python
                         | fetch('https://rpg-api.com/items') 
@@ -59,7 +55,7 @@ block content
                       button.btn.btn-green
                        | View Data 
                                        
-                #item2.section-block
+                #gettypes.section-block
                   .code-block
                     h5 
                      span.method-get GET-  
@@ -73,7 +69,7 @@ block content
                       button.btn.btn-green
                        | View Data 
 
-                #item3.section-block
+                #getbytype.section-block
                   .code-block
                     h5 
                       span.method-get GET-  
@@ -88,7 +84,7 @@ block content
                        | View Data     
               
 
-                #item4.section-block
+                #getitem.section-block
                   .code-block
                     h5 
                       span.method-get GET-  
@@ -101,53 +97,110 @@ block content
                     a(href='https://rpg-api.com/items/ironingot' target='_blank')
                       button.btn.btn-green
                        | View Data  
-                      
-                  // //code-block
-                // //section-block
-                #handlebars.section-block
+                
+                #createitem.section-block
                   .code-block
-                    h6 Handlebars Code Example
-                    pre.
-                      
-                  // //code-block
+                    h5 
+                      span.method-post POST-  
+                      span Simulate a new item creation
+                    pre
+                      code.language-javascript
+                        | fetch('https://rpg-api.com/items',{
+                        |  method:"POST",
+                        |  headers: {
+                        |     'Content-Type': 'application/json'
+                        |  },
+                        |  body:JSON.stringify({
+                        |         "id": "youID",
+                        |         "img": "https://ik.imagekit.io/rpgapi/Items/example.png",
+                        |         "name": "New Item",
+                        |         "description": "This is a new item",
+                        |         "price": 100,
+                        |         "type": "Weapon"
+                        |      })
+                        |  })
+                        |  .then(res=>res.json())
+                        |  .then(json=>console.log(json))
+              
+                
+                 #updateitem.section-block
                   .code-block
-                    h6 Git Code Example
-                    pre.
+                    h5 
+                      span.method-put PUT-  
+                      span Simulate the update of one item by id (not _id)
+                    pre
+                      code.language-javascript
+                        | fetch('https://rpg-api.com/items/ironsword',{
+                        |  method:"PUT",
+                        |  headers: {
+                        |     'Content-Type': 'application/json'
+                        |  },
+                        |  body:JSON.stringify({
+                        |         "img": "https://ik.imagekit.io/rpgapi/Items/example.png",
+                        |         "name": "New Item",
+                        |         "description": "This is a new item",
+                        |         "price": 100,
+                        |         "type": "Weapon"
+                        |      })
+                        |  })
+                        |  .then(res=>res.json())
+                        |  .then(json=>console.log(json))  
+             
+
+                 #deleteitem.section-block
+                  .code-block
+                    h5 
+                      span.method-delete DELETE-  
+                      span Retrive one item by id (not _id)
+                    pre
+                      code.language-python
+                        | fetch('https://rpg-api.com/items/ironingot',{
+                        | method:"DELETE"
+                        | })
+                        | .then(res=>res.json())
+                        | .then(json=>console.log(json))
+                  
                       
+                #shop.section-block
+                  .code-block
+                    h5 
+                     span.method-get GET-  
+                     span Retrive 10 random items from database                    
+                    pre
+                      code.language-python
+                        | fetch('https://rpg-api.com/shop') 
+                        |.then(res=&gt;res.json()) 
+                        |.then(json=&gt;console.log(json))
+                    a(href='https://rpg-api.com/shop' target='_blank')
+                      button.btn.btn-green
+                       | View Data                    
                   
           .doc-sidebar.col-md-3.col-12.order-0.d-none.d-md-flex
             #doc-nav.doc-nav
               nav#doc-menu.nav.doc-menu.flex-column.sticky
                 li.nav-item
-                  a.nav-link.scrollto(href='#download-section') Download
-                li.nav-item
-                  a.nav-link.scrollto(href='#installation-section') Installation
+                  a.nav-link.scrollto(href='#welcome') Welcome              
              
                 li.nav-item
-                  a.nav-link.scrollto(href='#code-section') Items
+                  a.nav-link.scrollto(href='#items') Items
                 nav.nav.doc-sub-menu.nav.flex-column
                   li.nav-item
-                    a.nav-link.scrollto(href='#item1') Get all item list
+                    a.nav-link.scrollto(href='#getitems') Get all item list
                   li.nav-item
-                    a.nav-link.scrollto(href='#item2') Get item types
+                    a.nav-link.scrollto(href='#gettypes') Get item types
                   li.nav-item
-                    a.nav-link.scrollto(href='#item3') Get items by type
+                    a.nav-link.scrollto(href='#getbytype') Get items by type
                   li.nav-item
-                    a.nav-link.scrollto(href='#item4') Get one item
-            
+                    a.nav-link.scrollto(href='#getitem') Get one item
+                  li.nav-item
+                    a.nav-link.scrollto(href='#createitem') Create a new item
+                  li.nav-item
+                    a.nav-link.scrollto(href='#updateitem') Update an item
+                  li.nav-item
+                    a.nav-link.scrollto(href='#deleteitem') Delete an item
+                  li.nav-item
+                    a.nav-link.scrollto(href='#shop') Random shop
                
-                li.nav-item
-                  a.nav-link.scrollto(href='#video-section') Video
-                li.nav-item
-                  a.nav-link.scrollto(href='#icons-section') Icons
-              // //doc-menu
-          // //doc-sidebar
-        // //doc-body
-      // //container
-    // //doc-wrapper
-  
-  // //page-wrapper
-
 script(src='/assets/plugins/bootstrap/js/bootstrap.min.js')
 script(src='/assets/plugins/prism/prism.js')
 script(src='/assets/plugins/stickyfill/dist/stickyfill.min.js')

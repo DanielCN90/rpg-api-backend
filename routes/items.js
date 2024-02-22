@@ -1,6 +1,5 @@
 var express = require("express");
-const  client_config  = require("../services/database");
-
+const client_config = require("../services/database");
 
 var router = express.Router();
 
@@ -11,25 +10,21 @@ let client = client_config;
 const db = client.db(dbname);
 const collection = db.collection(dbcollection);
 
-/* GET items listing. */
 
-
-
-/* GET item by id. */
+/* GET items listing */
 router.get("/", function (req, res, next) {
- 
   async function run() {
     try {
       await client.connect();
-     
-      let filter = { type : req.query.type }; 
-      if(!req.query.type) filter ={};
+      let filter = { type: req.query.type };
+      if (!req.query.type) filter = {};
       const elementos = await collection.find(filter).toArray();
       res.json(elementos);
     } catch (error) {
-      res.status(500).json({ mensaje: "Error al obtener por nombre de categoria" });
+      res
+        .status(500)
+        .json({ mensaje: "Error al obtener por nombre de categoria" });
     } finally {
-      // Ensures that the client will close when you finish/error
       await client.close();
     }
   }
@@ -40,7 +35,6 @@ router.get("/", function (req, res, next) {
 router.get("/:id", function (req, res, next) {
   async function run() {
     try {
-      // Connect the client to the server	(optional starting in v4.7)
       await client.connect();
       const elemento = await collection.findOne({ id: req.params.id });
       if (!elemento || elemento == null) {
@@ -50,69 +44,40 @@ router.get("/:id", function (req, res, next) {
     } catch (error) {
       res.status(500).json({ mensaje: "Error al obtener por ID" });
     } finally {
-      // Ensures that the client will close when you finish/error
       await client.close();
     }
   }
   run();
 });
 
-
-
-
-
-
-/* GET users listing. */
+/*POST Item simulated */
 router.post("/", function (req, res, next) {
-  console.log(req.body);
-
-  async function run() {
-    try {
-      // Connect the client to the server	(optional starting in v4.7)
-      await client.connect();
-      await collection.insertOne(req.body).then((a) => res.send(a));
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
-    }
-  }
-  run().catch(console.dir);
+  setTimeout(() => {
+    res.status(200).json({ message: "Item created successfully" });
+  }, 1000);
 });
 
+/*POST Item simulated */
+router.put("/", function (req, res, next) {
+  setTimeout(() => {
+    res.status(200).json({ message: "Item updated successfully" });
+  }, 1000);
+});
 
-
-/* GET users listing. */
-router.post("/multiple", function (req, res, next) {
-    console.log(req.body);
-  
-    async function run() {
-      try {
-        // Connect the client to the server	(optional starting in v4.7)
-        await client.connect();
-        console.log(req);
-        await collection.insertMany(req.body).then((a) => res.send(a));
-      } finally {
-        // Ensures that the client will close when you finish/error
-        await client.close();
-      }
-    }
-    run().catch(console.dir);
-  });
-  
-  
-
-
-/* DELETE users listing. */
+/* DELETE Item simulated */
 router.delete("/:id", function (req, res, next) {
+  setTimeout(() => {
+    res.status(200).json({ message: "Item deleted successfully" });
+  }, 1000);
+});
+
+/* POST Items in batch */
+router.post("/multiple", function (req, res, next) {
   async function run() {
     try {
-      // Connect the client to the server	(optional starting in v4.7)
       await client.connect();
-      await collection
-        .deleteOne({ _id: new ObjectId(req.params.id) })
-        .then((a) => res.send(a));
+      await collection.insertMany(req.body).then((a) => res.send(a));
     } finally {
-      // Ensures that the client will close when you finish/error
       await client.close();
     }
   }
