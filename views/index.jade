@@ -1,7 +1,156 @@
 extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
-  p This is other p
-  a(href='/monsters') Monsters
+block content 
+  .page-wrapper
+    // ******Header******
+    header#header.header
+      .container
+        .branding
+          h1.logo 
+              img(src='/assets/images/logo.png')
+              span.text-highlight RPG
+              span.text-bold API
+        // //branding
+      
+        .top-search-box
+          form.form-inline.search-form.justify-content-center(action='' method='get')
+            input.form-control.search-input(type='text' placeholder='Search...' name='search')
+            button.btn.search-btn(type='submit' value='Search')
+              i.fas.fa-search
+      // //container
+    // //header
+    .doc-wrapper
+      .container
+        
+        .doc-body.row
+          .doc-content.col-md-9.col-12.order-1
+            .content-inner
+              section#download-section.doc-section
+                h2.section-title Welcome to the RPG API Documentation!
+                .section-block
+               
+                  p Whether you're a beginner developer or seasoned coder, you've come to the right place to explore our straightforward RPG API.
+                    | Is designed with simplicity in mind, providing a basic set of endpoints perfect for small exercise applications and learning projects. It's the ideal tool for practicing API integration, honing your coding skills, and experimenting with RPG game mechanics.
+                  p So, dive in, explore the possibilities, and start building your own RPG-inspired applications today. Let your imagination run wild and have fun coding!
+          
+              section#code-section.doc-section
+                h2.section-title Items
+                .section-block
+                  p
+                    a(href='https://prismjs.com/' target='_blank') PrismJS
+                    |  is used as the syntax highlighter here. You can 
+                    a(href='https://prismjs.com/download.html' target='_blank') build your own version
+                    |  via their website should you need to.
+                // //section-block
+        
+        
+                #item1.section-block
+                  .code-block
+                    h5 
+                     span.method-get GET-  
+                     span Retrive all item list
+                    span Exist more of 100+ items registered
+                    pre
+                      code.language-python
+                        | fetch('https://rpg-api.com/items') 
+                        |.then(res=&gt;res.json()) 
+                        |.then(json=&gt;console.log(json))
+                    a(href='https://rpg-api.com/items' target='_blank')
+                      button.btn.btn-green
+                       | View Data 
+                                       
+                #item2.section-block
+                  .code-block
+                    h5 
+                     span.method-get GET-  
+                     span Retrive all item types
+                    pre
+                      code.language-python
+                        | fetch('https://rpg-api.com/itemTypes') 
+                        |.then(res=&gt;res.json()) 
+                        |.then(json=&gt;console.log(json))  
+                    a(href='https://rpg-api.com/itemTypes' target='_blank')
+                      button.btn.btn-green
+                       | View Data 
+
+                #item3.section-block
+                  .code-block
+                    h5 
+                      span.method-get GET-  
+                      span Retrive items filtered by Type
+                    pre
+                      code.language-python
+                        | fetch('https://rpg-api.com/items?type=Weapon') 
+                        |.then(res=&gt;res.json()) 
+                        |.then(json=&gt;console.log(json))  
+                    a(href='https://rpg-api.com/items?type=Weapon' target='_blank')
+                      button.btn.btn-green
+                       | View Data     
+              
+
+                #item4.section-block
+                  .code-block
+                    h5 
+                      span.method-get GET-  
+                      span Retrive one item by id (not _id)
+                    pre
+                      code.language-python
+                        | fetch('https://rpg-api.com/items/ironingot') 
+                        |.then(res=&gt;res.json()) 
+                        |.then(json=&gt;console.log(json))  
+                    a(href='https://rpg-api.com/items/ironingot' target='_blank')
+                      button.btn.btn-green
+                       | View Data  
+                      
+                  // //code-block
+                // //section-block
+                #handlebars.section-block
+                  .code-block
+                    h6 Handlebars Code Example
+                    pre.
+                      
+                  // //code-block
+                  .code-block
+                    h6 Git Code Example
+                    pre.
+                      
+                  
+          .doc-sidebar.col-md-3.col-12.order-0.d-none.d-md-flex
+            #doc-nav.doc-nav
+              nav#doc-menu.nav.doc-menu.flex-column.sticky
+                li.nav-item
+                  a.nav-link.scrollto(href='#download-section') Download
+                li.nav-item
+                  a.nav-link.scrollto(href='#installation-section') Installation
+             
+                li.nav-item
+                  a.nav-link.scrollto(href='#code-section') Items
+                nav.nav.doc-sub-menu.nav.flex-column
+                  li.nav-item
+                    a.nav-link.scrollto(href='#item1') Get all item list
+                  li.nav-item
+                    a.nav-link.scrollto(href='#item2') Get item types
+                  li.nav-item
+                    a.nav-link.scrollto(href='#item3') Get items by type
+                  li.nav-item
+                    a.nav-link.scrollto(href='#item4') Get one item
+            
+               
+                li.nav-item
+                  a.nav-link.scrollto(href='#video-section') Video
+                li.nav-item
+                  a.nav-link.scrollto(href='#icons-section') Icons
+              // //doc-menu
+          // //doc-sidebar
+        // //doc-body
+      // //container
+    // //doc-wrapper
+  
+  // //page-wrapper
+
+script(src='/assets/plugins/bootstrap/js/bootstrap.min.js')
+script(src='/assets/plugins/prism/prism.js')
+script(src='/assets/plugins/stickyfill/dist/stickyfill.min.js')
+script(src='/assets/plugins/gumshoe/gumshoe.polyfills.min.js')
+script(src='/assets/plugins/simplelightbox/simple-lightbox.min.js')
+script(src='/assets/js/main.js')

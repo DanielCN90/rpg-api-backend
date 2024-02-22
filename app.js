@@ -27,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/docs', indexRouter);
 app.use('/monsters', monstersRouter);
 app.use('/items', itemsRouter);
 app.use('/itemTypes', itemTypesRouter);

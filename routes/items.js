@@ -12,19 +12,28 @@ const db = client.db(dbname);
 const collection = db.collection(dbcollection);
 
 /* GET items listing. */
+
+
+
+/* GET item by id. */
 router.get("/", function (req, res, next) {
-  async function request() {
+ 
+  async function run() {
     try {
       await client.connect();
-      const elementos = await collection.find({}).toArray();
+     
+      let filter = { type : req.query.type }; 
+      if(!req.query.type) filter ={};
+      const elementos = await collection.find(filter).toArray();
       res.json(elementos);
     } catch (error) {
-      res.status(500).json({ mensaje: "Error al obtener elementos" });
+      res.status(500).json({ mensaje: "Error al obtener por nombre de categoria" });
     } finally {
+      // Ensures that the client will close when you finish/error
       await client.close();
     }
   }
-  request();
+  run();
 });
 
 /* GET item by id. */
@@ -47,6 +56,11 @@ router.get("/:id", function (req, res, next) {
   }
   run();
 });
+
+
+
+
+
 
 /* GET users listing. */
 router.post("/", function (req, res, next) {
