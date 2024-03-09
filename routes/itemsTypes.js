@@ -11,7 +11,6 @@ let client = client_config;
 const db = client.db(dbname);
 const collection = db.collection(dbcollection);
 
-/* GET items listing. */
 router.get("/", function (req, res, next) {
   async function request() {
     try {
@@ -19,16 +18,12 @@ router.get("/", function (req, res, next) {
       const elementos = await collection.find({}).toArray();
       res.json(elementos);
     } catch (error) {
-      res.status(500).json({ mensaje: "Error al obtener elementos" });
+      res.status(500).json({ mensaje: "Error to get item types" });
     } finally {
       await client.close();
     }
   }
   request();
 });
-
-
-
-
 
 module.exports = router;

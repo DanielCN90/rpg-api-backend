@@ -18,7 +18,7 @@ const db = client.db("rpg-api");
 const collection = db.collection("monsters");
 
 
-/* GET users listing. */
+
 router.get("/", function (req, res, next) {
   async function request() {
     try {
@@ -35,7 +35,7 @@ router.get("/", function (req, res, next) {
   request();
 });
 
-/* GET users listing. */
+
 router.get("/:id", function (req, res, next) {
   async function run() {
     try {

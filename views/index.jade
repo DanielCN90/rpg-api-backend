@@ -38,7 +38,7 @@ block content
                 .section-block
                   p Create a fantasy store with items of all clases. 
                     
-                    
+                  img(src="assets/images/testimage.PNG").sample 
         
         
                 #getitems.section-block
@@ -52,6 +52,21 @@ block content
                         |.then(res=&gt;res.json()) 
                         |.then(json=&gt;console.log(json))
                     a(href='https://rpg-api.com/items' target='_blank')
+                      button.btn.btn-green
+                       | View Data 
+
+                #getitemspagination.section-block
+                  .code-block
+                    h5 
+                     span.method-get GET-  
+                     span Retrive all item list using pagination  
+                    p The default pagesize is 10 .                
+                    pre
+                      code.language-python
+                        | fetch('https://rpg-api.com/items?page=1&pageSize=25') 
+                        |.then(res=&gt;res.json()) 
+                        |.then(json=&gt;console.log(json))
+                    a(href='https://rpg-api.com/items?page=1&pageSize=25' target='_blank')
                       button.btn.btn-green
                        | View Data 
                                        
@@ -102,7 +117,7 @@ block content
                   .code-block
                     h5 
                       span.method-post POST-  
-                      span Simulate a new item creation
+                      span (Simulated) Create a new item
                     pre
                       code.language-javascript
                         | fetch('https://rpg-api.com/items',{
@@ -127,7 +142,7 @@ block content
                   .code-block
                     h5 
                       span.method-put PUT-  
-                      span Simulate the update of one item by id (not _id)
+                      span (Simulated) Update of one item by id (not _id)
                     pre
                       code.language-javascript
                         | fetch('https://rpg-api.com/items/ironsword',{
@@ -151,7 +166,7 @@ block content
                   .code-block
                     h5 
                       span.method-delete DELETE-  
-                      span Retrive one item by id (not _id)
+                      span (Simulated) Removes one item by id from the database
                     pre
                       code.language-python
                         | fetch('https://rpg-api.com/items/ironingot',{
@@ -185,9 +200,9 @@ block content
                   a.nav-link.scrollto(href='#items') Items
                 nav.nav.doc-sub-menu.nav.flex-column
                   li.nav-item
-                    a.nav-link.scrollto(href='#getitems') Get all item list
+                    a.nav-link.scrollto(href='#getitems') Get Item list
                   li.nav-item
-                    a.nav-link.scrollto(href='#gettypes') Get item types
+                    a.nav-link.scrollto(href='#gettypes') Get Item types
                   li.nav-item
                     a.nav-link.scrollto(href='#getbytype') Get items by type
                   li.nav-item
@@ -200,6 +215,11 @@ block content
                     a.nav-link.scrollto(href='#deleteitem') Delete an item
                   li.nav-item
                     a.nav-link.scrollto(href='#shop') Random shop
+                li.nav-item
+                  a.nav-link.scrollto(href='#items') Other resources
+                nav.nav.doc-sub-menu.nav.flex-column
+                  li.nav-item
+                    a.nav-link.scrollto(href='#getitems') Get monsters
                
 script(src='/assets/plugins/bootstrap/js/bootstrap.min.js')
 script(src='/assets/plugins/prism/prism.js')

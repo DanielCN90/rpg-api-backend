@@ -1,6 +1,6 @@
 var express = require("express");
 const client_config = require("../services/database");
-
+const { Item } = require("mongodb");
 var router = express.Router();
 
 /* Database configuration */
@@ -10,20 +10,39 @@ let client = client_config;
 const db = client.db(dbname);
 const collection = db.collection(dbcollection);
 
-
 /* GET items listing */
 router.get("/", function (req, res, next) {
   async function run() {
+    /**Default pagination values */
+    const pageSize = parseInt(req.query.pageSize) || 10;
+    const page = parseInt(req.query.page) || 1;
+
     try {
       await client.connect();
+
+      /**Filtered by type */
       let filter = { type: req.query.type };
       if (!req.query.type) filter = {};
-      const elementos = await collection.find(filter).toArray();
-      res.json(elementos);
+
+      /**Add pagination and filter */
+      const items = await collection
+        .find(filter)
+        .skip((page - 1) * pageSize)
+        .limit(pageSize)
+        .toArray();
+
+      /**Return 2 types of response bodies, with pagination and without it */
+      if (req.query.pageSize || req.query.page)
+        res.json({
+          pagination: {
+            currentPage: page,
+            pageSize: pageSize,
+          },
+          items: items,
+        });
+      else res.json(items);
     } catch (error) {
-      res
-        .status(500)
-        .json({ mensaje: "Error al obtener por nombre de categoria" });
+      res.status(500).json({ mensaje: "Some wrong retriving data." });
     } finally {
       await client.close();
     }
@@ -50,7 +69,7 @@ router.get("/:id", function (req, res, next) {
   run();
 });
 
-/*POST Item simulated */
+/* POST Item simulated */
 router.post("/", function (req, res, next) {
   setTimeout(() => {
     res.status(200).json({ message: "Item created successfully" });
